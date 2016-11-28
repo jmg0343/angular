@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- directive inside html tag that tells html what angular module to run -->
+<html ng-app="store"> 
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Angular App</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Angular -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    </head>
+
+    <!-- ng-controller specifies which controller we are drawing info from -->
+    <body ng-controller="StoreController as store">
+        <div class="container">
+            <ul class="list-group">
+                <!-- ng-repeat acts as For Loop that iterates through products in controller -->
+                <li class="list-group-item" ng-repeat="product in store.products">
+                    <h3> 
+                        {{ product.name }} 
+                        <!-- currency formats as dollar amount -->
+                        <em class="pull-right"> {{ product.price | currency}}</em>
+                    </h3>
+                    <div class="gallery">
+                        <!-- ng-src is used to pull images specified in controller -->
+                        <img ng-src="{{product.images[0]}}" />
+                    </div>
+                    <!-- initialized tab upon refresh -->
+                    <section ng-init="tab = 1">
+                        <ul class="nav nav-pills">
+                            <!-- highlights active tab.          sets tab's value -->
+                            <li ng-class="{active:tab === 1}"> <a href ng-click="tab = 1">Description</a> </li>
+                            <li ng-class="{active:tab === 2}"> <a href ng-click="tab = 2">Specifications</a> </li>
+                            <li ng-class="{active:tab === 3}"> <a href ng-click="tab = 3">Reviews</a> </li>
+                        </ul>
+                    </section>
+                    <!-- if tab === corresponding value, displays information -->
+                    <div class="panel" ng-show="tab === 1">
+                        <h4>Description</h4>
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div class="panel" ng-show="tab === 2">
+                        <h4>Specifications</h4>
+                        <blockquote>None Yet</blockquote>
+                    </div>
+                    <div class="panel" ng-show="tab === 3">
+                        <h4>Reviews</h4>
+                        <blockquote>None Yet</blockquote>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+
+        <!-- Modules -->
+        <script src="js/app.js"></script>
+        <!-- Controllers -->
+        <script src="js/controllers/MainController.js"></script>
+        <!-- Bootstrap JS and jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
