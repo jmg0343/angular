@@ -20,6 +20,7 @@
 		this.review = {};
 
 		this.addReview = function(product) {
+			this.review.createdOn = Date.now();
 			product.reviews.push(this.review);
 			this.review = {};
 		};
@@ -58,7 +59,8 @@
 				{
 					stars: 1,
 					body: "This product is not so great",
-					author: "notgood@booooo.com"
+					author: "notgood@booooo.com",
+					createdOn: 1397490980837
 				}
 			],
 		}
