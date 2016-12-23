@@ -1,19 +1,9 @@
 (function(){
+
 	var app = angular.module('store', []);
 
 	app.controller('StoreController', function(){
 		this.products = gems;
-	});
-
-	app.controller('PanelController', function(){
-		this.tab = 1;
-
-		this.selectTab = function(setTab) {
-			this.tab = setTab;
-		};
-		this.isSelected = function(checkTab) {
-			return this.tab === checkTab;
-		};
 	});
 
 	app.controller('ReviewController', function(){
@@ -65,4 +55,31 @@
 			],
 		}
 	];
+// directives used as extended HTML attributes
+	app.directive('productTitle', function(){
+		return {
+			// defines directive as element type
+			restrict: 'E',
+			// points to product-title.html page
+			templateUrl: 'product-title.html'
+		};
+	});
+	app.directive('productPanels', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'product-panels.html',
+			// creates controller to be used with directive
+			controller: function(){
+				this.tab = 1;
+				this.selectTab = function(setTab) {
+					this.tab = setTab;
+				};
+				this.isSelected = function(checkTab) {
+					return this.tab === checkTab;
+				};
+			},
+			// sets controller alias
+			controllerAs: 'panel'
+		};
+	});
 })();
